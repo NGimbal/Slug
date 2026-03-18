@@ -221,18 +221,18 @@ function buildSlugMaterial( curveTex, bandTex, glyphDataVal, bandTransformVal, c
         const xcov = float( 0.0 ).toVar();
         const xwgt = float( 0.0 ).toVar();
 
-        const hHdr    = textureLoad( bandTex, ivec2( gx.add( biy ), gy ), int( 0 ) );
+        const hHdr    = textureLoad( bandTex, ivec2( gx.add( biy ), gy ) );
         const hCount  = hHdr.x.toInt();
         const hOff    = hHdr.y.toInt();
 
         Loop( { start: int( 0 ), end: hCount, type: 'int', condition: '<' }, ( { i } ) => {
 
-            const ref = textureLoad( bandTex, ivec2( gx.add( hOff ).add( i ), gy ), int( 0 ) );
+            const ref = textureLoad( bandTex, ivec2( gx.add( hOff ).add( i ), gy ) );
             const cLoc = ivec2( ref.x.toInt(), ref.y.toInt() );
 
             // Fetch quadratic Bezier control points and make sample-relative
-            const raw12 = textureLoad( curveTex, cLoc, int( 0 ) );
-            const raw3  = textureLoad( curveTex, ivec2( cLoc.x.add( int( 1 ) ), cLoc.y ), int( 0 ) );
+            const raw12 = textureLoad( curveTex, cLoc );
+            const raw3  = textureLoad( curveTex, ivec2( cLoc.x.add( int( 1 ) ), cLoc.y ) );
 
             const p12 = vec4(
                 raw12.x.sub( rc.x ), raw12.y.sub( rc.y ),
@@ -271,17 +271,17 @@ function buildSlugMaterial( curveTex, bandTex, glyphDataVal, bandTransformVal, c
         const ycov = float( 0.0 ).toVar();
         const ywgt = float( 0.0 ).toVar();
 
-        const vHdr   = textureLoad( bandTex, ivec2( gx.add( bmy ).add( int( 1 ) ).add( bix ), gy ), int( 0 ) );
+        const vHdr   = textureLoad( bandTex, ivec2( gx.add( bmy ).add( int( 1 ) ).add( bix ), gy ) );
         const vCount = vHdr.x.toInt();
         const vOff   = vHdr.y.toInt();
 
         Loop( { start: int( 0 ), end: vCount, type: 'int', condition: '<' }, ( { i } ) => {
 
-            const ref = textureLoad( bandTex, ivec2( gx.add( vOff ).add( i ), gy ), int( 0 ) );
+            const ref = textureLoad( bandTex, ivec2( gx.add( vOff ).add( i ), gy ) );
             const cLoc = ivec2( ref.x.toInt(), ref.y.toInt() );
 
-            const raw12 = textureLoad( curveTex, cLoc, int( 0 ) );
-            const raw3  = textureLoad( curveTex, ivec2( cLoc.x.add( int( 1 ) ), cLoc.y ), int( 0 ) );
+            const raw12 = textureLoad( curveTex, cLoc );
+            const raw3  = textureLoad( curveTex, ivec2( cLoc.x.add( int( 1 ) ), cLoc.y ) );
 
             const p12 = vec4(
                 raw12.x.sub( rc.x ), raw12.y.sub( rc.y ),
